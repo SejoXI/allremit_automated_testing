@@ -7,25 +7,34 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends Page {
 
-    HomePage homePage;
-
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"loginIdentifierInput\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"LoginIdentifierInput\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement username;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"loginPasswordInput\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"LoginPasswordInput\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement password;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"loginbtn\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"LoginActionButton\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement loginBtn;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.TextView\").text(\"Enter email address or phone number\")")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
+    WebElement emailError;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.TextView\").resourceId(\"android:id/alertTitle\").text(\"INVALID CREDENTIALS\")")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
+    WebElement credentialsError;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/button1\")")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
+    WebElement alertOk;
 
 
     public LoginPage(AppiumDriver driver) {
         super(driver);
         StarterPage starterPage = new StarterPage(driver);
-        homePage = new HomePage(driver);
         starterPage.navigateToLoginScreen();
     }
 
@@ -33,16 +42,23 @@ public class LoginPage extends Page {
         this.username.sendKeys(username);
         this.password.sendKeys(password);
         this.loginBtn.click();
-
     }
 
     public boolean loginSuccessful() throws InterruptedException {
         Thread.sleep(10000);
+        HomePage homePage = new HomePage(driver);
         return homePage.sendMoneyBtn.isDisplayed();
     }
 
     public boolean loginFailed() throws InterruptedException {
-        Thread.sleep(2000);
-        return username.isDisplayed();
+        Thread.sleep(5000);
+        boolean result = credentialsError.isDisplayed();
+        alertOk.click();
+        return result;
+    }
+
+    public boolean invalidEmail() throws InterruptedException {
+        Thread.sleep(1000);
+        return emailError.isDisplayed();
     }
 }

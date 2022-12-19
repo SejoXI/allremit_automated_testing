@@ -1,5 +1,6 @@
 package tests;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Login {
     private static LoginPage loginPage;
-
+    private final Dotenv dotenv = Dotenv.load();
     @Before
     public void setup() {
         if (System.getenv("DEVICEFARM_DEVICE_NAME") == null) {
@@ -23,14 +24,26 @@ public class Login {
 
     @Test
     public void successfulLoginWithCorrectCredentials() throws InterruptedException {
-        loginPage.login("jamieoli@mailinator.com", "pass1234");
+        loginPage.login(dotenv.get("CORRECT_EMAIL"), dotenv.get("CORRECT_PASSWORD"));
         assertTrue(loginPage.loginSuccessful());
     }
 
     @Test
     public void failedLoginWithWrongCredentials() throws InterruptedException {
-        loginPage.login("testUser1234", "pass1234");
+        loginPage.login(dotenv.get("WRONG_EMAIL"), dotenv.get("WRONG_PASSWORD"));
         assertTrue(loginPage.loginFailed());
+    }
+
+    @Test
+    public void failedLoginWithCorrectEmailandWrongPassword() throws InterruptedException {
+        loginPage.login(dotenv.get("CORRECT_EMAIL"), dotenv.get("WRONG_PASSWORD"));
+        assertTrue(loginPage.loginFailed());
+    }
+
+    @Test
+    public void failedLoginWithInvalidEmail() throws InterruptedException {
+        loginPage.login(dotenv.get("INVALID_EMAIL"), dotenv.get("WRONG_PASSWORD"));
+        assertTrue(loginPage.invalidEmail());
     }
 
     @After

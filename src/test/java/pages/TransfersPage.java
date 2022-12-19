@@ -1,4 +1,9 @@
 package pages;
 
-public class TransfersPage {
+import io.appium.java_client.AppiumDriver;
+
+public class TransfersPage extends Page {
+    public TransfersPage(AppiumDriver driver) {
+        super(driver);
+    }
 }
