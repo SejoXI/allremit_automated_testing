@@ -51,7 +51,7 @@ public class LoginPage extends Page {
     }
 
     public boolean loginFailed() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         boolean result = credentialsError.isDisplayed();
         alertOk.click();
         return result;
