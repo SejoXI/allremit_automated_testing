@@ -18,10 +18,9 @@ public class Capabilities extends Config {
     private static final String DEFAULT_IOS_DEVICE_NAME = "iPhone 12";
     private static final int DEFAULT_APPIUM_PORT = 4723;
     private static final String DEFAULT_APPIUM_HOST = "localhost";
-
+    private static final Dotenv dotenv = Dotenv.load();
     private static AndroidDriver androidDriver;
     private static IOSDriver iosDriver;
-    private static final Dotenv dotenv = Dotenv.load();
 
     public Capabilities() {
 

@@ -56,30 +56,30 @@ public class HomePage extends Page {
         loginPage.login(dotenv.get("CORRECT_EMAIL"), dotenv.get("CORRECT_PASSWORD"));
     }
 
-    public void navigateToSettingsPage(){
+    public void navigateToSettingsPage() {
         settings.click();
     }
 
-    public void navigateToReferralPage(){
+    public void navigateToReferralPage() {
         referrals.click();
     }
 
-    public void navigateToTransfersPage(){
+    public void navigateToTransfersPage() {
         transfers.click();
     }
 
-    public void navigateToHomePage(){
+    public void navigateToHomePage() {
         home.click();
     }
 
-    public void sendMoneyInstantTransfer(){
+    public void sendMoneyInstantTransfer() {
         countryChanger.click();
         ghana.click();
         instantTransfer.click();
         transferTypeContinueBtn.click();
     }
 
-    public void sendMoneyACHExpress(){
+    public void sendMoneyACHExpress() {
         countryChanger.click();
         ghana.click();
         ACHExpress.click();

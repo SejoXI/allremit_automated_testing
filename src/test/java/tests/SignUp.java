@@ -38,7 +38,7 @@ public class SignUp {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         signUpPage.afterTests();
     }
 }

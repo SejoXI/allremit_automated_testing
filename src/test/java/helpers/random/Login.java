@@ -1,4 +1,3 @@
-
 package helpers.random;
 
 import com.google.gson.annotations.SerializedName;

@@ -17,17 +17,17 @@ public class IncreaseLimits {
     private final Dotenv dotenv = Dotenv.load();
 
     @Before
-    public void setup(){
-        if (System.getenv("DEVICEFARM_DEVICE_NAME") == null){
+    public void setup() {
+        if (System.getenv("DEVICEFARM_DEVICE_NAME") == null) {
             increaseLimitsPage = new IncreaseLimitsPage(getAndroidDriver());
-        }else{
+        } else {
             increaseLimitsPage = new IncreaseLimitsPage(getAppiumDriver());
         }
     }
 
     @Test
-    public void applyForLimitIncrease(){
-        switch (increaseLimitsPage.checkCurrentLimit()){
+    public void applyForLimitIncrease() {
+        switch (increaseLimitsPage.checkCurrentLimit()) {
             case 1:
                 assertTrue(increaseLimitsPage.applyForLimit2());
                 break;
@@ -45,9 +45,8 @@ public class IncreaseLimits {
     }*/
 
 
-
     @After
-    public void tearDown(){
+    public void tearDown() {
         increaseLimitsPage.afterTests();
     }
 }

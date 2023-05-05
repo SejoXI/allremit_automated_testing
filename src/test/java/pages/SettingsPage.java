@@ -25,15 +25,15 @@ public class SettingsPage extends Page {
         homePage.navigateToSettingsPage();
     }
 
-    public void navigateToPaymentSettingsPage(){
+    public void navigateToPaymentSettingsPage() {
         paymentSettingsOption.click();
     }
 
-    public void navigateToIncreaseLimitsPage(){
+    public void navigateToIncreaseLimitsPage() {
         increaseLimitOption.click();
     }
 
-    public boolean signOut(){
+    public boolean signOut() {
         signOutBtn.click();
         LoginPage loginPage = new LoginPage(driver);
         return loginPage.username.isDisplayed();

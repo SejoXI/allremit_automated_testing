@@ -125,17 +125,17 @@ public class SignUpPage extends Page {
         starterPage.navigateToSignUpScreen();
     }
 
-    public boolean signUp(boolean useInvalidEmail, boolean useInvalidPhone){
-        if (useInvalidEmail){
+    public boolean signUp(boolean useInvalidEmail, boolean useInvalidPhone) {
+        if (useInvalidEmail) {
             return signUpWithInvalidEmail();
         } else if (useInvalidPhone) {
             return signUpWithInvalidPhone();
-        } else{
+        } else {
             return signUpWithValidData();
         }
     }
 
-    public boolean signUpWithValidData(){
+    public boolean signUpWithValidData() {
         try {
             Result user = generateUser();
 
@@ -149,35 +149,35 @@ public class SignUpPage extends Page {
 
             //Select gender
             gender.click();
-            if (user.getGender().equals("male")){
+            if (user.getGender().equals("male")) {
                 genderMale.click();
-            }else{
+            } else {
                 genderFemale.click();
             }
 
             //Enter address
             address.sendKeys(
                     user.getLocation().getStreet().getNumber().toString()
-                            +" "+
+                            + " " +
                             user.getLocation().getStreet().getName()
-                            +", "+
+                            + ", " +
                             user.getLocation().getCity()
-                            +", "+
+                            + ", " +
                             user.getLocation().getState()
-                            +" "+
+                            + " " +
                             user.getLocation().getPostcode()
-                            +", USA"
+                            + ", USA"
             );
 
             //Select state
             state.click();
             String platformName = driver.getCapabilities().getPlatformName().name();
-            if (platformName.equalsIgnoreCase("ANDROID")){
+            if (platformName.equalsIgnoreCase("ANDROID")) {
                 driver.findElement(new AppiumBy.ByAndroidUIAutomator(
                         "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\").instance(1)).scrollIntoView(" +
-                                "new UiSelector().text(\""+user.getLocation().getState()+"\"))"
+                                "new UiSelector().text(\"" + user.getLocation().getState() + "\"))"
                 )).click();
-            }else{
+            } else {
                 //Use IOS selector to find state element
             }
 
@@ -195,10 +195,10 @@ public class SignUpPage extends Page {
             emailAddress.sendKeys(user.getEmail());
 
             //Enter phone number
-            String userPhone = user.getPhone().replace("("," ");
-            userPhone = userPhone.replace(")"," ");
-            userPhone = userPhone.replace("-"," ");
-            userPhone = userPhone.replace(" ","");
+            String userPhone = user.getPhone().replace("(", " ");
+            userPhone = userPhone.replace(")", " ");
+            userPhone = userPhone.replace("-", " ");
+            userPhone = userPhone.replace(" ", "");
             phone.sendKeys(userPhone);
 
             //Enter password
@@ -228,7 +228,7 @@ public class SignUpPage extends Page {
         }
     }
 
-    public boolean signUpWithInvalidEmail(){
+    public boolean signUpWithInvalidEmail() {
         try {
             Result user = generateUser();
 
@@ -242,35 +242,35 @@ public class SignUpPage extends Page {
 
             //Select gender
             gender.click();
-            if (user.getGender().equals("male")){
+            if (user.getGender().equals("male")) {
                 genderMale.click();
-            }else{
+            } else {
                 genderFemale.click();
             }
 
             //Enter address
             address.sendKeys(
                     user.getLocation().getStreet().getNumber().toString()
-                            +" "+
+                            + " " +
                             user.getLocation().getStreet().getName()
-                            +", "+
+                            + ", " +
                             user.getLocation().getCity()
-                            +", "+
+                            + ", " +
                             user.getLocation().getState()
-                            +" "+
+                            + " " +
                             user.getLocation().getPostcode()
-                            +", USA"
+                            + ", USA"
             );
 
             //Select state
             state.click();
             String platformName = driver.getCapabilities().getPlatformName().name();
-            if (platformName.equalsIgnoreCase("ANDROID")){
+            if (platformName.equalsIgnoreCase("ANDROID")) {
                 driver.findElement(new AppiumBy.ByAndroidUIAutomator(
                         "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\").instance(1)).scrollIntoView(" +
-                                "new UiSelector().text(\""+user.getLocation().getState()+"\"))"
+                                "new UiSelector().text(\"" + user.getLocation().getState() + "\"))"
                 )).click();
-            }else{
+            } else {
                 //Use IOS selector to find state element
             }
 
@@ -287,10 +287,10 @@ public class SignUpPage extends Page {
             emailAddress.sendKeys("invalidemail");
 
             //Enter phone number
-            String userPhone = user.getPhone().replace("("," ");
-            userPhone = userPhone.replace(")"," ");
-            userPhone = userPhone.replace("-"," ");
-            userPhone = userPhone.replace(" ","");
+            String userPhone = user.getPhone().replace("(", " ");
+            userPhone = userPhone.replace(")", " ");
+            userPhone = userPhone.replace("-", " ");
+            userPhone = userPhone.replace(" ", "");
             phone.sendKeys(userPhone);
 
             //Enter password
@@ -313,7 +313,7 @@ public class SignUpPage extends Page {
         }
     }
 
-    public boolean signUpWithInvalidPhone(){
+    public boolean signUpWithInvalidPhone() {
         try {
             Result user = generateUser();
 
@@ -327,35 +327,35 @@ public class SignUpPage extends Page {
 
             //Select gender
             gender.click();
-            if (user.getGender().equals("male")){
+            if (user.getGender().equals("male")) {
                 genderMale.click();
-            }else{
+            } else {
                 genderFemale.click();
             }
 
             //Enter address
             address.sendKeys(
                     user.getLocation().getStreet().getNumber().toString()
-                            +" "+
+                            + " " +
                             user.getLocation().getStreet().getName()
-                            +", "+
+                            + ", " +
                             user.getLocation().getCity()
-                            +", "+
+                            + ", " +
                             user.getLocation().getState()
-                            +" "+
+                            + " " +
                             user.getLocation().getPostcode()
-                            +", USA"
+                            + ", USA"
             );
 
             //Select state
             state.click();
             String platformName = driver.getCapabilities().getPlatformName().name();
-            if (platformName.equalsIgnoreCase("ANDROID")){
+            if (platformName.equalsIgnoreCase("ANDROID")) {
                 driver.findElement(new AppiumBy.ByAndroidUIAutomator(
                         "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\").instance(1)).scrollIntoView(" +
-                                "new UiSelector().text(\""+user.getLocation().getState()+"\"))"
+                                "new UiSelector().text(\"" + user.getLocation().getState() + "\"))"
                 )).click();
-            }else{
+            } else {
                 //Use IOS selector to find state element
             }
 

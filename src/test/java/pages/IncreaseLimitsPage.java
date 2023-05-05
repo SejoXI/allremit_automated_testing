@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
-public class IncreaseLimitsPage extends Page{
+public class IncreaseLimitsPage extends Page {
 
     Dotenv dotenv = Dotenv.load();
 
@@ -45,7 +45,6 @@ public class IncreaseLimitsPage extends Page{
     WebElement limit3CurrentValue;
 
 
-
     //Apply button for Increase Limit
     @AndroidFindBy(uiAutomator = "new UiScrollable(new UiSelector()).scrollIntoView(new UiSelector().resourceId(\"IncreaseLimitsActionApplyButton\"))")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
@@ -58,7 +57,6 @@ public class IncreaseLimitsPage extends Page{
     WebElement understandBtn;
 
 
-
     //Permissions IDs
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.android.permissioncontroller:id/permission_allow_one_time_button\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
@@ -67,7 +65,6 @@ public class IncreaseLimitsPage extends Page{
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"com.android.permissioncontroller:id/permission_allow_button\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement permissionAllowBtn;
-
 
 
     //Limit 2 IDs
@@ -120,7 +117,6 @@ public class IncreaseLimitsPage extends Page{
     WebElement passport;
 
 
-
     //Document Selection IDs
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/button2\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
@@ -137,7 +133,6 @@ public class IncreaseLimitsPage extends Page{
     @AndroidFindBy(uiAutomator = "new UiSelector().className(\"android.widget.Button\").resourceId(\"android:id/button1\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement ocrOkBtn;
-
 
 
     //Limit 3 IDs
@@ -199,13 +194,13 @@ public class IncreaseLimitsPage extends Page{
 
 
     private void pushFileToDevice(String remotePath, String pathname) {
-        try{
+        try {
             if (driver.getCapabilities().getPlatformName().is(Platform.ANDROID)) {
-                ((AndroidDriver)driver).pushFile(remotePath, new File(pathname));
+                ((AndroidDriver) driver).pushFile(remotePath, new File(pathname));
             } else if (driver.getCapabilities().getPlatformName().is(Platform.IOS)) {
-                ((IOSDriver)driver).pushFile(remotePath, new File(pathname));
+                ((IOSDriver) driver).pushFile(remotePath, new File(pathname));
             }
-        }catch (IOException exception){
+        } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
     }
@@ -214,7 +209,7 @@ public class IncreaseLimitsPage extends Page{
         //filesOption.click();
         rootBtn.click();
 
-        if (driver.getCapabilities().getPlatformName().is(Platform.ANDROID)){
+        if (driver.getCapabilities().getPlatformName().is(Platform.ANDROID)) {
             /*driver.findElement(new AppiumBy.ByAndroidUIAutomator(
                     "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\").instance(0)).scrollIntoView(" +
                             "new UiSelector().className(\"android.widget.TextView\").resourceId(\"android:id/title\").text(\""+driver.getCapabilities().getCapability("deviceName")+"\"))"
@@ -229,32 +224,32 @@ public class IncreaseLimitsPage extends Page{
 
             driver.findElement(new AppiumBy.ByAndroidUIAutomator(
                     "new UiScrollable(new UiSelector().className(\"android.widget.ScrollView\").instance(0)).scrollIntoView(" +
-                            "new UiSelector().resourceId(\"android:id/title\").className(\"android.widget.TextView\").text(\""+imageFileName+"\"))"
+                            "new UiSelector().resourceId(\"android:id/title\").className(\"android.widget.TextView\").text(\"" + imageFileName + "\"))"
             )).click();
-        }else{
+        } else {
             //Use IOS selector to find state element
         }
     }
 
     private void allowPermissions() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        try{
+        try {
             permissionOneTimeBtn.click();
             permissionAllowBtn.click();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-        }catch (Exception e){
+        } catch (Exception e) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         }
     }
 
 
-    public int checkCurrentLimit(){
-        try{
-            if (limit1CurrentValue.isDisplayed()){
+    public int checkCurrentLimit() {
+        try {
+            if (limit1CurrentValue.isDisplayed()) {
                 return 1;
             }
-        }catch (Exception e){
-            try{
+        } catch (Exception e) {
+            try {
                 if (limit2CurrentValue.isDisplayed()) {
                     return 2;
                 }
@@ -265,7 +260,7 @@ public class IncreaseLimitsPage extends Page{
         return 3;
     }
 
-    public void fillLimit2Form(){
+    public void fillLimit2Form() {
 
         //Push document file to device
         pushFileToDevice("sdcard/Download/document_verified.jpg", "src/test/resources/document_verified.jpg");
@@ -295,7 +290,7 @@ public class IncreaseLimitsPage extends Page{
 
     }
 
-    public void fillLimit3Form(){
+    public void fillLimit3Form() {
         //Push document file to device
         pushFileToDevice("sdcard/Download/document_verified.jpg", "src/test/resources/document_verified.jpg");
 
@@ -320,7 +315,7 @@ public class IncreaseLimitsPage extends Page{
         }
     }
 
-    public boolean applyForLimit2(){
+    public boolean applyForLimit2() {
         limit2.click();
         applyBtn.click();
 
@@ -335,7 +330,7 @@ public class IncreaseLimitsPage extends Page{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         try {
             Thread.sleep(5000L);
-            if (remitBox.isDisplayed()){
+            if (remitBox.isDisplayed()) {
                 return true;
             }
         } catch (NoSuchElementException | InterruptedException e) {
@@ -346,7 +341,7 @@ public class IncreaseLimitsPage extends Page{
         return remitBox.isDisplayed();
     }
 
-    public boolean applyForLimit3(){
+    public boolean applyForLimit3() {
         limit3.click();
         applyBtn.click();
 
@@ -361,7 +356,7 @@ public class IncreaseLimitsPage extends Page{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         try {
             Thread.sleep(5000L);
-            if (remitBox.isDisplayed()){
+            if (remitBox.isDisplayed()) {
                 return true;
             }
         } catch (NoSuchElementException | InterruptedException e) {
@@ -372,7 +367,7 @@ public class IncreaseLimitsPage extends Page{
         return remitBox.isDisplayed();
     }
 
-    public boolean pseudoLimit3(){
+    public boolean pseudoLimit3() {
         limit2.click();
         applyBtn.click();
 
@@ -387,7 +382,7 @@ public class IncreaseLimitsPage extends Page{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         try {
             Thread.sleep(5000L);
-            if (remitBox.isDisplayed()){
+            if (remitBox.isDisplayed()) {
                 return true;
             }
         } catch (NoSuchElementException | InterruptedException e) {

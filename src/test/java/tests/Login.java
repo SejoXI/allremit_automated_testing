@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 public class Login {
     private static LoginPage loginPage;
     private final Dotenv dotenv = Dotenv.load();
+
     @Before
     public void setup() {
         if (System.getenv("DEVICEFARM_DEVICE_NAME") == null) {

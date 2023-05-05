@@ -15,7 +15,7 @@ public class PaymentSettings {
     private PaymentSettingsPage paymentSettingsPage;
 
     @Before
-    public void setup(){
+    public void setup() {
         if (System.getenv("DEVICEFARM_DEVICE_NAME") == null) {
             paymentSettingsPage = new PaymentSettingsPage(getAndroidDriver());
         } else {
@@ -24,17 +24,17 @@ public class PaymentSettings {
     }
 
     @Test
-    public void addCard(){
+    public void addCard() {
         assertTrue(paymentSettingsPage.addNewCard());
     }
 
     @Test
-    public void deleteCard(){
+    public void deleteCard() {
         assertFalse(paymentSettingsPage.deleteCard(0));
     }
 
     @Test
-    public void setCardPrimary(){
+    public void setCardPrimary() {
         assertTrue(paymentSettingsPage.setCardPrimary());
     }
 

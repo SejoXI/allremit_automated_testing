@@ -49,9 +49,9 @@ public class LoginPage extends Page {
     public boolean loginSuccessful() throws InterruptedException {
         Thread.sleep(10000);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        try{
+        try {
             return loginBtn.isDisplayed();
-        }catch (Exception e){
+        } catch (Exception e) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
             return false;
         }

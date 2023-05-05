@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.time.Duration;
 
-public class PaymentSettingsPage extends Page{
+public class PaymentSettingsPage extends Page {
 
     public static String MASTERCARD = "MASTERCARD";
     public static String VISA = "VISA";
@@ -107,7 +107,6 @@ public class PaymentSettingsPage extends Page{
     WebElement bank2PrimaryBtn;
 
 
-
     public PaymentSettingsPage(AppiumDriver driver) {
         super(driver);
         SettingsPage settingsPage = new SettingsPage(driver);
@@ -115,10 +114,10 @@ public class PaymentSettingsPage extends Page{
     }
 
 
-    public String checkCard1Type(){
+    public String checkCard1Type() {
         String c1Text = card1AccNumber.getText();
 
-        if (c1Text.contains("9991")){
+        if (c1Text.contains("9991")) {
             return VISA;
         } else {
             return MASTERCARD;
@@ -126,50 +125,50 @@ public class PaymentSettingsPage extends Page{
     }
 
 
-    public boolean checkHasCards(){
+    public boolean checkHasCards() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        try{
+        try {
             return card1AccNumber.isDisplayed();
-        }catch (Exception e){
+        } catch (Exception e) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
             return false;
         }
     }
 
 
-    public boolean checkHasBanks(){
+    public boolean checkHasBanks() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        try{
+        try {
             return bank1AccNumber.isDisplayed();
-        }catch (Exception e){
+        } catch (Exception e) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
             return false;
         }
     }
 
 
-    public boolean addNewCard(){
-        if (checkHasCards()){
+    public boolean addNewCard() {
+        if (checkHasCards()) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
-            try{
-                if (card2AccNumber.isDisplayed()){
+            try {
+                if (card2AccNumber.isDisplayed()) {
                     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
                     deleteCard(2);
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
             }
 
             String cardType = checkCard1Type();
 
             addNewCardBtn.click();
-            if (cardType.equals(MASTERCARD)){
+            if (cardType.equals(MASTERCARD)) {
                 cardNumber.sendKeys(dotenv.get("VISA"));
-            }else if (cardType.equals(VISA)){
+            } else if (cardType.equals(VISA)) {
                 cardNumber.sendKeys(dotenv.get("MASTERCARD"));
             }
-        }else{
+        } else {
             addNewCardBtn.click();
             cardNumber.sendKeys(dotenv.get("VISA"));
         }
@@ -190,44 +189,43 @@ public class PaymentSettingsPage extends Page{
     }
 
 
-    public void addNewBank(){
+    public void addNewBank() {
         banksTab.click();
         addNewBankBtn.click();
         banksConsentContinueBtn.click();
     }
 
 
-    public boolean deleteCard(int position){
-        if (position == 0){
-            if (!checkHasCards()){
+    public boolean deleteCard(int position) {
+        if (position == 0) {
+            if (!checkHasCards()) {
                 addNewCard();
             }
             card1DeleteBtn.click();
             paymentDeleteYes.click();
-            try{
+            try {
                 Thread.sleep(5000);
                 return card1AccNumber.isDisplayed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
 
-        }
-        else if (position == 1){
+        } else if (position == 1) {
             card1DeleteBtn.click();
             paymentDeleteYes.click();
-            try{
+            try {
                 Thread.sleep(5000);
                 return card1AccNumber.isDisplayed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
-        }else if (position == 2){
+        } else if (position == 2) {
             card2DeleteBtn.click();
             paymentDeleteYes.click();
-            try{
+            try {
                 Thread.sleep(5000);
                 return card2AccNumber.isDisplayed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
         }
@@ -235,38 +233,37 @@ public class PaymentSettingsPage extends Page{
     }
 
 
-    public boolean deleteBank(int position){
+    public boolean deleteBank(int position) {
         banksTab.click();
-        if (position == 0){
-            if (!checkHasBanks()){
+        if (position == 0) {
+            if (!checkHasBanks()) {
                 addNewBank();
             }
             bank1DeleteBtn.click();
             paymentDeleteYes.click();
-            try{
+            try {
                 Thread.sleep(5000);
                 return bank1AccNumber.isDisplayed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
 
-        }
-        else if (position == 1){
+        } else if (position == 1) {
             bank1DeleteBtn.click();
             paymentDeleteYes.click();
-            try{
+            try {
                 Thread.sleep(5000);
                 return bank1AccNumber.isDisplayed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
-        }else if (position == 2){
+        } else if (position == 2) {
             bank2DeleteBtn.click();
             paymentDeleteYes.click();
-            try{
+            try {
                 Thread.sleep(5000);
                 return bank2AccNumber.isDisplayed();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return false;
             }
         }
@@ -274,18 +271,18 @@ public class PaymentSettingsPage extends Page{
     }
 
 
-    public boolean setCardPrimary(){
-        if (checkHasCards()){
+    public boolean setCardPrimary() {
+        if (checkHasCards()) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-            try{
-                if (card2AccNumber.isDisplayed()){
+            try {
+                if (card2AccNumber.isDisplayed()) {
                     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
                     String oldC2Text = card2AccNumber.getText();
                     card2PrimaryBtn.click();
                     Thread.sleep(5000);
                     return oldC2Text.equals(card1AccNumber.getText());
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
                 addNewCard();
                 String oldC2Text = card2AccNumber.getText();
@@ -297,7 +294,7 @@ public class PaymentSettingsPage extends Page{
                     throw new RuntimeException(ex);
                 }
             }
-        }else{
+        } else {
             addNewCard();
             addNewCard();
             String oldC2Text = card2AccNumber.getText();
@@ -314,19 +311,19 @@ public class PaymentSettingsPage extends Page{
     }
 
 
-    public boolean setBankPrimary(){
+    public boolean setBankPrimary() {
         banksTab.click();
-        if (checkHasBanks()){
+        if (checkHasBanks()) {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-            try{
-                if (bank2AccNumber.isDisplayed()){
+            try {
+                if (bank2AccNumber.isDisplayed()) {
                     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
                     String oldB2Text = bank2AccNumber.getText();
                     bank2PrimaryBtn.click();
                     Thread.sleep(5000);
                     return oldB2Text.equals(bank1AccNumber.getText());
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
                 addNewBank();
                 String oldB2Text = bank2AccNumber.getText();
@@ -338,7 +335,7 @@ public class PaymentSettingsPage extends Page{
                     throw new RuntimeException(ex);
                 }
             }
-        }else{
+        } else {
             addNewBank();
             addNewBank();
             String oldB2Text = bank2AccNumber.getText();
