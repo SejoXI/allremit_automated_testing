@@ -166,8 +166,7 @@ public class SignUpPage extends Page {
                             user.getLocation().getState()
                             +" "+
                             user.getLocation().getPostcode()
-                            +", "+
-                            user.getLocation().getCountry()
+                            +", USA"
             );
 
             //Select state
@@ -260,8 +259,7 @@ public class SignUpPage extends Page {
                             user.getLocation().getState()
                             +" "+
                             user.getLocation().getPostcode()
-                            +", "+
-                            user.getLocation().getCountry()
+                            +", USA"
             );
 
             //Select state
@@ -346,8 +344,7 @@ public class SignUpPage extends Page {
                             user.getLocation().getState()
                             +" "+
                             user.getLocation().getPostcode()
-                            +", "+
-                            user.getLocation().getCountry()
+                            +", USA"
             );
 
             //Select state

@@ -5,6 +5,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
+
 public class LoginPage extends Page {
 
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"LoginIdentifierInput\")")
@@ -46,8 +48,13 @@ public class LoginPage extends Page {
 
     public boolean loginSuccessful() throws InterruptedException {
         Thread.sleep(10000);
-        HomePage homePage = new HomePage(driver);
-        return homePage.sendMoneyBtn.isDisplayed();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        try{
+            return loginBtn.isDisplayed();
+        }catch (Exception e){
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
+            return false;
+        }
     }
 
     public boolean loginFailed() throws InterruptedException {

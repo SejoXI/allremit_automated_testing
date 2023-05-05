@@ -3,6 +3,7 @@ package helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -20,6 +21,7 @@ public class Capabilities extends Config {
 
     private static AndroidDriver androidDriver;
     private static IOSDriver iosDriver;
+    private static final Dotenv dotenv = Dotenv.load();
 
     public Capabilities() {
 
@@ -33,9 +35,9 @@ public class Capabilities extends Config {
 
             capabilities.setCapability("platformName", "Android");
             capabilities.setCapability("automationName", "UiAutomator2");
-            capabilities.setCapability("deviceName", "Nokia 3.2");
-            capabilities.setCapability("platformVersion", "11");
-            capabilities.setCapability("appPackage", "com.allremit");
+            capabilities.setCapability("deviceName", dotenv.get("ANDROID_DEVICE_NAME"));
+            capabilities.setCapability("platformVersion", dotenv.get("ANDROID_PLATFORM_VERSION"));
+            capabilities.setCapability("appPackage", dotenv.get("APP_PACKAGE"));
             capabilities.setCapability("appActivity", ".MainActivity");
 
             androidDriver = new AndroidDriver(getServiceUrl(), capabilities);

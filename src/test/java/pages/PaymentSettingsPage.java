@@ -24,17 +24,21 @@ public class PaymentSettingsPage extends Page{
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement addNewCardBtn;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"self-card-number\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"card-number\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement cardNumber;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"self-month-select\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"month\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement cardMonth;
 
-    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"self-year-select\")")
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"year\")")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
     WebElement cardYear;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"security-code\")")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
+    WebElement cardCVV;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().resourceId(\"android:id/text1\").instance(2)")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'Foo'`]")
@@ -174,6 +178,7 @@ public class PaymentSettingsPage extends Page{
         cardOptions2.click();
         cardYear.click();
         cardOptions2.click();
+        cardCVV.sendKeys("123");
         cardAddContinueBtn.click();
 
         try {

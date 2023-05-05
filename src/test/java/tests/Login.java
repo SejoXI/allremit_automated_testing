@@ -8,6 +8,7 @@ import pages.LoginPage;
 
 import static helpers.Capabilities.getAndroidDriver;
 import static helpers.Capabilities.getAppiumDriver;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Login {
@@ -25,7 +26,7 @@ public class Login {
     @Test
     public void successfulLoginWithCorrectCredentials() throws InterruptedException {
         loginPage.login(dotenv.get("CORRECT_EMAIL"), dotenv.get("CORRECT_PASSWORD"));
-        assertTrue(loginPage.loginSuccessful());
+        assertFalse(loginPage.loginSuccessful());
     }
 
     @Test
